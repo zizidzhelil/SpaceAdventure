@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BL.DependencyResolver;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SpaceAdventure.DependencyResolver;
 
 namespace SpaceAdventure
 {
@@ -6,7 +9,15 @@ namespace SpaceAdventure
    {
       static void Main(string[] args)
       {
-         Console.WriteLine("Hello World!");
+         IConfigurationRoot configguration = new ConfigurationBuilder()
+            .AddJsonFile("appSettings.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build();
+
+         ServiceProvider serviceProvider = new ServiceCollection()
+            .RegisterConcreteTypes(configguration)
+            .RegisterTypes()
+            .BuildServiceProvider();
       }
    }
 }
