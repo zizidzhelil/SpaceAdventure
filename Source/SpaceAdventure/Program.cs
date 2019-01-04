@@ -1,7 +1,9 @@
 ﻿using BL.DependencyResolver;
+using Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SpaceAdventure.DependencyResolver;
+using System;
 
 namespace SpaceAdventure
 {
@@ -18,6 +20,9 @@ namespace SpaceAdventure
             .RegisterConcreteTypes(configguration)
             .RegisterTypes()
             .BuildServiceProvider();
-      }
+
+            var pictureOfTheDayService = serviceProvider.GetService<IGetPictureForDayService>();
+            var result = pictureOfTheDayService.GetPictureForDayAsync(DateTime.Today).GetAwaiter().GetResult();
+        }
    }
 }
