@@ -13,6 +13,6 @@ namespace SpaceAdventure.Providers
          _configuration = configuration;
       }
 
-      public string ApiKey => _configuration[AppSettingsConstants.WeatherApiKey];
+      public string ApiKey => _configuration[AppSettingsConstants.SpaceAdventureKey];
    }
 }

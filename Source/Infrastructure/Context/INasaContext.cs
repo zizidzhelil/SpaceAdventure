@@ -4,6 +4,8 @@ namespace Infrastructure.Context
 {
     public interface INasaContext
     {
-        Task<string> MakeRequest(string url);
+        Task<string> MakeStringRequest(string url);
+
+        Task<byte[]> MakeByteArrayRequest(string url);
     }
 }

@@ -22,7 +22,7 @@ namespace SpaceAdventure
             .BuildServiceProvider();
 
             var pictureOfTheDayService = serviceProvider.GetService<IGetPictureForDayService>();
-            var result = pictureOfTheDayService.GetPictureForDayAsync(DateTime.Today).GetAwaiter().GetResult();
+            var result = pictureOfTheDayService.GetPictureForDayAsync(DateTime.Today.AddDays(-1)).GetAwaiter().GetResult();
         }
    }
 }

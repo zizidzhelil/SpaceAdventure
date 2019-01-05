@@ -9,17 +9,23 @@ namespace BL.Services
 {
     public class GetPictureForDayService : IGetPictureForDayService
     {
+        private readonly IGetPictureInfoForDayQueryAsync _getPictureInfoForDayQueryAsync;
         private readonly IGetPictureForDayQueryAsync _getPictureForDayQueryAsync;
 
-        public GetPictureForDayService(IGetPictureForDayQueryAsync getPictureForDayQueryAsync)
+        public GetPictureForDayService(
+            IGetPictureInfoForDayQueryAsync getPictureInfoForDayQueryAsync, 
+            IGetPictureForDayQueryAsync getPictureForDayQueryAsync)
         {
+            _getPictureInfoForDayQueryAsync = getPictureInfoForDayQueryAsync;
             _getPictureForDayQueryAsync = getPictureForDayQueryAsync;
         }
 
         public async Task<PictureForDayModel> GetPictureForDayAsync(DateTime date)
         {
-            PictureInfo pictureOfTheDay = await _getPictureForDayQueryAsync.ExecuteAsync(DateTime.Today);
-            PictureForDayModel model = new PictureForDayModel(pictureOfTheDay);
+            PictureInfo pictureInfo = await _getPictureInfoForDayQueryAsync.ExecuteAsync(date);
+            byte[] pictureForDay = await _getPictureForDayQueryAsync.ExecuteAsync(pictureInfo.HDUrl);
+
+            PictureForDayModel model = new PictureForDayModel(pictureInfo, pictureForDay);
 
             return model;
         }

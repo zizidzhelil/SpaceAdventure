@@ -1,11 +1,9 @@
-﻿using Core.Models;
-using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Infrastructure.APOD.Queries
 {
     public interface IGetPictureForDayQueryAsync
     {
-        Task<PictureInfo> ExecuteAsync(DateTime date);
+        Task<byte[]> ExecuteAsync(string hdUrl);
     }
 }

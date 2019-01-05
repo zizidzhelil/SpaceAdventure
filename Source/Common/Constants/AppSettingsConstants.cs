@@ -2,6 +2,6 @@
 {
    public class AppSettingsConstants
    {
-      public static readonly string WeatherApiKey = "WeatherApiKey";
+      public static readonly string SpaceAdventureKey = "SpaceAdventureKey";
    }
 }

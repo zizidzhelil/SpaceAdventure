@@ -1,8 +1,5 @@
-﻿using Core.Models;
-using Infrastructure.APOD.Queries;
+﻿using Infrastructure.APOD.Queries;
 using Infrastructure.Context;
-using Newtonsoft.Json;
-using System;
 using System.Threading.Tasks;
 
 namespace DAL.APOD.Queries
@@ -16,13 +13,11 @@ namespace DAL.APOD.Queries
             _nasaContext = nasaContext;
         }
 
-        public async Task<PictureInfo> ExecuteAsync(DateTime date)
+        public async Task<byte[]> ExecuteAsync(string hdUrl)
         {
-            string result = await _nasaContext.MakeRequest("");
+            byte[] result = await _nasaContext.MakeByteArrayRequest(hdUrl);
 
-            var pictureForDay = JsonConvert.DeserializeObject<PictureInfo>(result);
-
-            return pictureForDay;
+            return result;
         }
     }
 }

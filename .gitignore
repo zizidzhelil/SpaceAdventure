@@ -339,3 +339,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database 
 healthchecksdb
+/Source/SpaceAdventure/Properties/launchSettings.json
+/Source/DAL/Properties/launchSettings.json
