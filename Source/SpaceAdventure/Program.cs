@@ -39,7 +39,7 @@ namespace SpaceAdventure
             string folderPath = $"C:\\Users\\zizi\\Desktop\\SpaceAdventure";
 
             var writer = serviceProvider.GetService<IReportGenerator>();
-            writer.Generate(pictureForDayDataTable, result, folderPath);           
+            writer.Generate(pictureForDayDataTable, result, DateTime.Today.AddDays(-1), folderPath);
         }
     }
 }

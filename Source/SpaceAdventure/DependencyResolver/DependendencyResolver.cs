@@ -17,7 +17,6 @@ namespace SpaceAdventure.DependencyResolver
         public static ServiceCollection RegisterConcreteTypes(this ServiceCollection serviceCollection, IConfigurationRoot configuration)
         {
             serviceCollection.AddSingleton<IAppSettingsProvider>(new AppSettingsProvider(configuration));
-            serviceCollection.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
             serviceCollection.AddScoped<IDataTableConverter, DataTableConverter>();
 

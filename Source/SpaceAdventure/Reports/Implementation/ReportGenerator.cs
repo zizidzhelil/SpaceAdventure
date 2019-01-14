@@ -1,7 +1,7 @@
 ﻿using Common.Constants;
 using Infrastructure.Models;
-using Infrastructure.Providers;
 using SpaceAdventure.Writers;
+using System;
 using System.Data;
 using System.IO;
 using System.IO.Abstractions;
@@ -10,23 +10,18 @@ namespace SpaceAdventure.Reports.Implementation
 {
     public class ReportGenerator : IReportGenerator
     {
-        private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly ITextFileWriter _textFileWriter;
         private readonly IFileSystem _fileSystem;
+        private readonly ITextFileWriter _textFileWriter;      
 
-        public ReportGenerator(
-            IDateTimeProvider dateTimeProvider, 
-            ITextFileWriter textFileWriter, 
-            IFileSystem fileSystem)
+        public ReportGenerator(IFileSystem fileSystem, ITextFileWriter textFileWriter)
         {
-            _dateTimeProvider = dateTimeProvider;
-            _textFileWriter = textFileWriter;
             _fileSystem = fileSystem;
+            _textFileWriter = textFileWriter;          
         }
 
-        public void Generate(DataTable reportData, PictureForDayModel pictureForDay, string folderPath)
+        public void Generate(DataTable reportData, PictureForDayModel pictureForDay, DateTime pictureDate, string folderPath)
         {
-            string folderName = _dateTimeProvider.GetCurrentDateTime().ToString(CommonConstants.NasaApiDateFormat);
+            string folderName = pictureDate.ToString(CommonConstants.NasaApiDateFormat);
             string fileName = $"{folderName}.txt";
 
             string folderPathFull = Path.Combine(folderPath, folderName);
@@ -34,7 +29,7 @@ namespace SpaceAdventure.Reports.Implementation
 
             _fileSystem.Directory.CreateDirectory(folderPathFull);
 
-            _textFileWriter.Write(reportData, filePathFull);
+            _textFileWriter.Write(filePathFull, reportData);
         }
     }
 }

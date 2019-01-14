@@ -17,7 +17,7 @@ namespace DAL.Context
         {
             var client = _httpClientFactory.CreateClient();
             var result = await client.GetStringAsync(url);
-
+           
             return result;
         }
 

@@ -4,6 +4,6 @@ namespace SpaceAdventure.Writers
 {
     public interface ITextFileWriter
     {
-        void Write(DataTable reportData, string filePathFull);
+        void Write(string filePathFull, DataTable reportData);
     }
 }

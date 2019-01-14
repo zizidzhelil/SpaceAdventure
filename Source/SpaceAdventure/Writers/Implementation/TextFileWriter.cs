@@ -1,25 +1,36 @@
-﻿using System.IO;
-using System.Data;
+﻿using System.Data;
+using System.IO.Abstractions;
+using System.Text;
 
 namespace SpaceAdventure.Writers.Implementation
 {
     public class TextFileWriter : ITextFileWriter
     {
-        public void Write(DataTable reportData, string filePathFull)
+        private readonly IFileSystem _fileSystem;
+
+        public TextFileWriter(IFileSystem fileSystem)
         {
-            using (StreamWriter writer = new StreamWriter(filePathFull))
+            _fileSystem = fileSystem;
+        }
+
+        public void Write(string filePathFull, DataTable reportData)
+        {
+            StringBuilder reportBuilder = new StringBuilder();
+
+            foreach (DataRow row in reportData.Rows)
             {
                 int i;
-                foreach (DataRow row in reportData.Rows)
+                object[] array = row.ItemArray;
+
+                for (i = 0; i < array.Length - 1; i++)
                 {
-                    object[] array = row.ItemArray;
-                    for (i = 0; i < array.Length - 1; i++)
-                    {
-                        writer.Write(array[i].ToString() + ": ");
-                    }
-                    writer.WriteLine(array[i].ToString());
+                    reportBuilder.Append(array[i].ToString() + ": ");
                 }
+
+                reportBuilder.AppendLine(array[i].ToString());
             }
+
+            _fileSystem.File.WriteAllText(filePathFull, reportBuilder.ToString());
         }
     }
 }

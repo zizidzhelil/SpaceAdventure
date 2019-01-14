@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Common.Constants;
+using Core.Models;
 using DAL.Factories.ConcreteUrlBuilders;
 using Infrastructure.APOD.Queries;
 using Infrastructure.Context;
@@ -24,7 +25,7 @@ namespace DAL.APOD.Queries
         {
             string result = await _nasaContext.MakeStringRequest(
                 _urlFactory.Create(nameof(PictureInfoForDayUrlBuilder),
-                date.ToString("yyyy-MM-dd")));
+                date.ToString(CommonConstants.NasaApiDateFormat)));
 
             PictureInfo pictureInfoForDay = JsonConvert.DeserializeObject<PictureInfo>(result);
 
