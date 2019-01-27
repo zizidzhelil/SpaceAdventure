@@ -37,7 +37,7 @@ namespace BL.Tests.Services.GetPictureForDayServiceTests
         [Test]
         public async Task ShouldReturnPictureModel()
         {
-            IGetPictureForDayService pictureForDayService = new GetPictureForDayService(
+            IPictureService pictureForDayService = new PictureService(
                _getPictureInfoForDayQueryAsyncMock,
                _getPictureForDayQueryAsyncMock);
 

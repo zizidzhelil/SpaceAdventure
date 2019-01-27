@@ -24,22 +24,39 @@ namespace SpaceAdventure
                .RegisterTypes()
                .BuildServiceProvider();
 
-            var pictureOfTheDayService = serviceProvider.GetService<IGetPictureForDayService>();
-            var result = pictureOfTheDayService.GetPictureForDayAsync(DateTime.Today.AddDays(-1)).GetAwaiter().GetResult();
+            var asteroidsInfoService = serviceProvider.GetService<IAsteroidsInfoService>();
+            var result = asteroidsInfoService.GetAsteroidsInfoAsync(DateTime.Today, DateTime.Today.AddDays(2)).GetAwaiter().GetResult();
 
-            var converter = serviceProvider.GetService<IDataTableConverter>();
-            var pictureForDayDataTable = converter.ConvertPictureForDayToDataTable(result);
+            var converter = serviceProvider.GetService<IAsteroidsInfoDataTableConverter>();
 
-            Console.WriteLine($"Picture info for {result.Date}:");
+            var asteroidsInfoDataTable = converter.ConvertAsteroidsToDataTable(result);
+
             ConsoleTableBuilder
-               .From(pictureForDayDataTable)
+               .From(asteroidsInfoDataTable)
                .WithFormat(ConsoleTableBuilderFormat.Default)
                .ExportAndWriteLine();
 
             string folderPath = $"C:\\Users\\zizi\\Desktop\\SpaceAdventure";
 
             var writer = serviceProvider.GetService<IReportGenerator>();
-            writer.Generate(pictureForDayDataTable, result, DateTime.Today.AddDays(-1), folderPath);
+            writer.Generate(asteroidsInfoDataTable, DateTime.Today, folderPath);
+
+            //var pictureOfTheDayService = serviceProvider.GetService<IGetPictureForDayService>();
+            //var result = pictureOfTheDayService.GetPictureForDayAsync(DateTime.Today.AddDays(-1)).GetAwaiter().GetResult();
+
+            //var converter = serviceProvider.GetService<IDataTableConverter>();
+            //var pictureForDayDataTable = converter.ConvertPictureForDayToDataTable(result);
+
+            //Console.WriteLine($"Picture info for {result.Date}:");
+            //ConsoleTableBuilder
+            //   .From(pictureForDayDataTable)
+            //   .WithFormat(ConsoleTableBuilderFormat.Default)
+            //   .ExportAndWriteLine();
+
+            //string folderPath = $"C:\\Users\\zizi\\Desktop\\SpaceAdventure";
+
+            //var writer = serviceProvider.GetService<IReportGenerator>();
+            //writer.Generate(pictureForDayDataTable, DateTime.Today.AddDays(-1), folderPath);
         }
     }
 }

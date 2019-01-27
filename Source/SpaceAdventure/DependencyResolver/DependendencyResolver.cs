@@ -19,6 +19,7 @@ namespace SpaceAdventure.DependencyResolver
             serviceCollection.AddSingleton<IAppSettingsProvider>(new AppSettingsProvider(configuration));
 
             serviceCollection.AddScoped<IDataTableConverter, DataTableConverter>();
+            serviceCollection.AddScoped<IAsteroidsInfoDataTableConverter, AsteroidsInfoDataTableConverter>();
 
             serviceCollection.AddScoped<IReportGenerator, ReportGenerator>();
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public interface IGetPictureForDayService
+    public interface IPictureService
     {
         Task<PictureForDayModel> GetPictureForDayAsync(DateTime date);
     }

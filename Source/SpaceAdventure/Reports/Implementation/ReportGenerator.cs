@@ -19,9 +19,9 @@ namespace SpaceAdventure.Reports.Implementation
             _textFileWriter = textFileWriter;          
         }
 
-        public void Generate(DataTable reportData, PictureForDayModel pictureForDay, DateTime pictureDate, string folderPath)
+        public void Generate(DataTable reportData, DateTime date, string folderPath)
         {
-            string folderName = pictureDate.ToString(CommonConstants.NasaApiDateFormat);
+            string folderName = date.ToString(CommonConstants.NasaApiDateFormat);
             string fileName = $"{folderName}.txt";
 
             string folderPathFull = Path.Combine(folderPath, folderName);

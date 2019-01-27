@@ -1,11 +1,10 @@
-﻿using Infrastructure.Models;
-using System;
+﻿using System;
 using System.Data;
 
 namespace SpaceAdventure.Reports
 {
     public interface IReportGenerator
     {
-        void Generate(DataTable reportData, PictureForDayModel pictureForDay, DateTime pictureDate, string folderPath);
+        void Generate(DataTable reportData, DateTime date, string folderPath);
     }
 }

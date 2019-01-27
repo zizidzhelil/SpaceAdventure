@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BL.Services
 {
-    public class GetPictureForDayService : IGetPictureForDayService
+    public class PictureService : IPictureService
     {
         private readonly IGetPictureInfoForDayQueryAsync _getPictureInfoForDayQueryAsync;
         private readonly IGetPictureForDayQueryAsync _getPictureForDayQueryAsync;
 
-        public GetPictureForDayService(
+        public PictureService(
             IGetPictureInfoForDayQueryAsync getPictureInfoForDayQueryAsync, 
             IGetPictureForDayQueryAsync getPictureForDayQueryAsync)
         {
