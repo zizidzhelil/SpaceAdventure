@@ -23,15 +23,15 @@ namespace SpaceAdventure.Converters.Implementation
                 dataTable.Rows.Add("  - Minimum", asteroid.EstimatedDiameter.Kilometers.Min);
                 dataTable.Rows.Add("  - Maximum", asteroid.EstimatedDiameter.Kilometers.Max);
                 dataTable.Rows.Add("Close approach info");
-                dataTable.Rows.Add("  - Close approach date", asteroid.CloseApproachDate);
+                dataTable.Rows.Add("  - Close approach date", asteroid.CloseApproachData.Last().CloseApproachDate);
                 dataTable.Rows.Add("  - Velocity");
-                dataTable.Rows.Add("      * Kilometers per second", asteroid.RelativeVelocity.KilometersPerSecond);
-                dataTable.Rows.Add("      * Kilometers per hour", asteroid.RelativeVelocity.KilometersPerHour);
+                dataTable.Rows.Add("      * Kilometers per second", asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerSecond);
+                dataTable.Rows.Add("      * Kilometers per hour", asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerHour);
                 dataTable.Rows.Add("  - Miss distance");
-                dataTable.Rows.Add("      * Kilometers", asteroid.MissDistance?.Kilometers);
-                dataTable.Rows.Add("      * Astronomical", asteroid.MissDistance?.Astronomical);
-                dataTable.Rows.Add("      * Lunar", asteroid.MissDistance?.Lunar);
-                dataTable.Rows.Add("  - Orbiting body", asteroid.OrbitingBody);
+                dataTable.Rows.Add("      * Kilometers", asteroid.CloseApproachData.Last().MissDistance?.Kilometers);
+                dataTable.Rows.Add("      * Astronomical", asteroid.CloseApproachData.Last().MissDistance?.Astronomical);
+                dataTable.Rows.Add("      * Lunar", asteroid.CloseApproachData.Last().MissDistance?.Lunar);
+                dataTable.Rows.Add("  - Orbiting body", asteroid.CloseApproachData.Last().OrbitingBody);
                 dataTable.Rows.Add();
             }
 

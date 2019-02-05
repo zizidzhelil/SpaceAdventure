@@ -28,22 +28,16 @@ namespace Infrastructure.Models
                     {
                         KilometersPerSecond = asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerHour,
                         KilometersPerHour = asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerSecond
-                    }
+                    },
+                    MissDistance = new Distance
+                    {
+                        Kilometers = asteroid.CloseApproachData.Last().MissDistance?.Kilometers,
+                        Astronomical = asteroid.CloseApproachData.Last().MissDistance?.Astronomical,
+                        Lunar = asteroid.CloseApproachData.Last().MissDistance?.Lunar
+                    },
+                    OrbitingBody = asteroid.CloseApproachData.Last().OrbitingBody
                 }
             };
-            CloseApproachDate = asteroid.CloseApproachData.Last().CloseApproachDate;
-            RelativeVelocity = new RelativeVelocity
-            {
-                KilometersPerSecond = asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerSecond,
-                KilometersPerHour = asteroid.CloseApproachData.Last().RelativeVelocity.KilometersPerHour
-            };
-            MissDistance = new Distance
-            {
-                Kilometers = asteroid.CloseApproachData.Last().MissDistance?.Kilometers,
-                Astronomical = asteroid.CloseApproachData.Last().MissDistance?.Astronomical,
-                Lunar = asteroid.CloseApproachData.Last().MissDistance?.Lunar
-            };
-            OrbitingBody = asteroid.CloseApproachData.Last().OrbitingBody;
         }
 
         public string Name { get; set; }
@@ -55,13 +49,5 @@ namespace Infrastructure.Models
         public Diameter EstimatedDiameter { get; set; }
 
         public List<CloseApproachData> CloseApproachData { get; set; }
-
-        public string CloseApproachDate { get; set; }
-
-        public RelativeVelocity RelativeVelocity { get; set; }
-
-        public Distance MissDistance { get; set; }
-
-        public string OrbitingBody { get; set; }
     }
 }

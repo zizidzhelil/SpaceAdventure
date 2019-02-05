@@ -50,7 +50,6 @@ namespace SpaceAdventure.Tests.Reports.Implementation.ReportGeneratorTests
 
             reportGenerator.Generate(
                 dataTable,
-                PictureForDayModelMock.PictureForDayMock,
                 new DateTime(2019, 01, 13),
                 $@"c:\demo\");
 
