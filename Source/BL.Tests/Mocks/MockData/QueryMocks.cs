@@ -2,6 +2,7 @@
 using Core.Models.NeoFeedModels;
 using Infrastructure.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BL.Tests.Mocks.MockData
 {
@@ -45,11 +46,11 @@ namespace BL.Tests.Mocks.MockData
                             new CloseApproachData
                             {
                                 CloseApproachDate = "some",
-                                EpochDateCloseApproach = new object(),
+                                EpochDateCloseApproach = null,
                                 RelativeVelocity = new RelativeVelocity
                                 {
-                                    KilometersPerHour = "12",
-                                    KilometersPerSecond = "12000"
+                                    KilometersPerHour = "12000",
+                                    KilometersPerSecond = "12"
                                 },
                                 MissDistance = new Distance
                                 {
@@ -105,6 +106,49 @@ namespace BL.Tests.Mocks.MockData
         };
 
         public static readonly PictureForDayModel PictureForDay = new PictureForDayModel(GetPictureInfoQueryResult, new byte[] { 123 });
-        public static readonly List<AsteroidsByDaysModel> AsteroidsByDays = new List<AsteroidsByDaysModel>();
+        public static readonly List<AsteroidsByDaysModel> AsteroidsByDays = new List<AsteroidsByDaysModel>()
+        {
+            new AsteroidsByDaysModel
+            {
+                Date = "0001-01-01",
+                Asteroids = new List<AsteroidModel>()
+                {
+                    new AsteroidModel(GetAsteroid)
+                    {
+                        Name = "astro",
+                        NasaPictureUrl = "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3553060",
+                        AbsoluteMagnitude = 0.3,
+                        EstimatedDiameter = new Diameter
+                        {
+                           Kilometers = new Kilometers
+                           {
+                                Min = 0.2,
+                                Max = 6.8
+                           }
+                        },
+                        CloseApproachData = new List<CloseApproachData>
+                        {
+                            new CloseApproachData
+                            {
+                                CloseApproachDate = "some",
+                                EpochDateCloseApproach = GetAsteroid.CloseApproachData.Last().EpochDateCloseApproach,
+                                RelativeVelocity = new RelativeVelocity
+                                {
+                                    KilometersPerHour = "12",
+                                    KilometersPerSecond = "12000"
+                                },
+                                MissDistance = new Distance
+                                {
+                                    Astronomical = "12",
+                                    Lunar = "65",
+                                    Kilometers = "9"
+                                },
+                                OrbitingBody = "ab"
+                            }
+                        }
+                    }
+                }
+            }
+        };
     }
 }
